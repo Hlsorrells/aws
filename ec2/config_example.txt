@@ -1,0 +1,28 @@
+#!/bin/bash -ex
+
+# Update yum
+yum -y update
+
+# Add node's source repo
+curl -sl https://npm.nodesource.com/setup_15x | bash -
+
+# Install nodejs
+yum -y install nodejs
+
+# Create a dedicated directory for the application
+mkdir -p /var/app
+
+# Download the app zip file from S3
+wget https://aws-name.s3-us-west-2.amazonaws.com/bucket/folder/file.zip
+
+# Unzip the file into a specific folder
+unzip file.zip -d /var/app/
+
+# Go to new directory
+cd /var/app/
+
+# Install dependencies
+npm install
+
+# Start your app
+npm start
